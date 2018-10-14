@@ -4,29 +4,6 @@
 # ──────────────────────────────────────────────────────────────────────────────
 #
 
-  #
-  # ─── CONSTANTS ──────────────────────────────────────────────────────────────
-  #
-
-  MAX_LENGTH = 40
-
-  #
-  # ─── ALL COMMANDS ───────────────────────────────────────────────────────────
-  #
-
-  commands =
-    owner: "/usr/local/bin/chunkc tiling::query --window owner"
-    name:  "/usr/local/bin/chunkc tiling::query --window name"
-
-  #
-  # ─── GLOBALS ────────────────────────────────────────────────────────────────
-  #
-
-  globals =
-    owner: ""
-    name:  ""
-
-  #
   # ─── COLORS ─────────────────────────────────────────────────────────────────
   #
 
@@ -36,7 +13,7 @@
     red:     "#fb4924"
     green:   "#b8bb26"
     yellow:  "#fabd2f"
-    blue:    "#458588"
+    blue:    "#cc6e22"
     magenta: "#b16286"
     cyan:    "#689d6a"
     white:   "#ebdbb2"
@@ -45,9 +22,8 @@
   # ─── COMMAND ────────────────────────────────────────────────────────────────
   #
 
-  command: "echo " +
-           "$(#{ commands.owner }):::" +
-           "$(#{ commands.name })"
+  command: "sh /Users/xaleza/Documents/nerbar/widgets/best.widget/scripts/itunes.sh"
+
 
   #
   # ─── REFRESH ────────────────────────────────────────────────────────────────
@@ -58,43 +34,18 @@
   #
   # ─── RENDER ─────────────────────────────────────────────────────────────────
   #
-
-  render: ( ) ->
+  render: ( output ) ->
     """
     <link rel="stylesheet" href="./font-awesome/font-awesome.min.css" />
-
-    <div class="info-item window">
-      <div class="icon"><i class="fa fa-apple"></i></div>
-      <span class="window-output"></span>
+    <div align="center">
+      <div class="info-item window">
+        <div class="icon"><i class="fa fa-music" aria-hidden="true"></i></div>
+        <span class='playing'></span></span><span class='white'>#{output}</span>
+      </div>
     </div>
     """
 
-  #
-  # ─── RENDER ─────────────────────────────────────────────────────────────────
-  #
 
-  update: ( output ) ->
-    output = output.split( /:::/g )
-
-    owner = output[ 0 ]
-    name  = output[ 1 ]
-
-    if owner.replace( /([ \t\n])/g, "" ).length > 0
-      globals.owner = owner
-    if owner == "?"
-      globals.owner="xaleza"
-    
-    if name.replace( /([ \t\n])/g, "" ).length > 0
-      if name.length > MAX_LENGTH
-        globals.name = name.substr(0, 40) + "..."
-      else
-        globals.name = name
-    else
-      globals.name="Desktop"
-
-    $( ".window-output" ).text( "#{ globals.owner } - #{ globals.name }" )
-
-  #
   # ─── STYLE ──────────────────────────────────────────────────────────────────
   #
 
@@ -109,13 +60,14 @@
       .icon
         padding: 1px 5px
         margin-right: 5px
-
+    text-align: center
     top: 3.5px
-    left: 0px
+    right: 26.5%
     font-family: 'Fira Code'
     font-size: 13px
     font-smoothing: antialiasing
     z-index: 0
   """
+
 
 # ──────────────────────────────────────────────────────────────────────────────

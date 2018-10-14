@@ -11,6 +11,7 @@
   commands =
     battery:  "pmset -g batt | egrep '([0-9]+\%).*' -o --colour=auto " +
               "| cut -f1 -d';'"
+    date:     "date +\"%a %d %b\""
     time:     "date +\"%H:%M\""
     wifi:     "/System/Library/PrivateFrameworks/Apple80211.framework/" +
               "Versions/Current/Resources/airport -I | " +
@@ -31,6 +32,7 @@
     blue:    "#458588"
     magenta: "#b16286"
     cyan:    "#689d6a"
+    purple:  "#7957a8"
     white:   "#ebdbb2"
 
   #
@@ -39,6 +41,7 @@
 
   command: "echo " +
            "$(#{ commands.battery }):::" +
+           "$(#{ commands.date }):::" +
            "$(#{ commands.time }):::" +
            "$(#{ commands.wifi }):::" +
            "$(#{ commands.volume }):::" +
@@ -57,7 +60,10 @@
   render: ( ) ->
     """
     <link rel="stylesheet" href="./font-awesome/font-awesome.min.css" />
-
+    <div class="info-item date">
+      <div class="icon"><i class="fa fa-calendar-o" aria-hidden="true"></i></div>
+      <span class="date-output"></span>
+    </div>
     <div class="info-item volume">
       <div class="icon"><span class="volume-icon"></span></div>
       <span class="volume-output"></span>
@@ -67,7 +73,7 @@
       <span class="wifi-output"></span>
     </div>
     <div class="info-item battery">
-      <div class="icon"><span class="battery-icon"></span></div>
+      <div class="icon"><span class="fa fa-battery-full"></span></div>
       <span class="battery-output"></span>
     </div>
     <div class="info-item time">
@@ -84,12 +90,14 @@
     output = output.split( /:::/g )
 
     battery  = output[ 0 ]
-    time     = output[ 1 ]
-    wifi     = output[ 2 ]
-    volume   = output[ 3 ]
-    charging = output[ 4 ]
+    date     = output[ 1 ]
+    time     = output[ 2 ]
+    wifi     = output[ 3 ]
+    volume   = output[ 4 ]
+    charging = output[ 5 ]
 
     $( ".battery-output" ) .text( "#{ battery }" )
+    $( ".date-output" )    .text( "#{ date }" )
     $( ".time-output" )    .text( "#{ time }" )
     $( ".wifi-output" )    .text( "#{ wifi }" )
     $( ".volume-output" )  .text( "#{ volume }%" )
@@ -135,8 +143,10 @@
   style: """
     .battery .icon
       background-color: #{ colors.green }
+    .date .icon
+      background-color: #{ colors.purple }
     .time .icon
-      background-color: #{ colors.magenta }
+      background-color: #{ colors.blue }
     .wifi .icon
       background-color: #{ colors.grey }
     .volume .icon
