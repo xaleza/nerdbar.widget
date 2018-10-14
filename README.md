@@ -2,7 +2,7 @@
 
 My menu bar 'replacement', created using [Übersicht](http://tracesof.net/uebersicht/).
 
-![Demo](/Demo.png)
+![new](https://i.imgur.com/AaNriSf.png)
 
 # Elements
 - Focused window (using chunkwm)
@@ -10,6 +10,8 @@ My menu bar 'replacement', created using [Übersicht](http://tracesof.net/uebers
 - Wi-Fi connection
 - Battery
 - Current time
+- Current date (NEW)
+- Current iTunes Song (NEW)
 
 # Installation
 
