@@ -21,8 +21,8 @@
   #
   # ─── COMMAND ────────────────────────────────────────────────────────────────
   #
-
-  command: "sh /Users/xaleza/Documents/nerbar/widgets/best.widget/scripts/itunes.sh"
+best.widget
+  command: "sh /scripts/itunes.sh"
 
 
   #
